@@ -54,6 +54,22 @@ feature 'Chitter.' do
       expect { sign_up_wrong }.not_to change(User, :count)
       expect(page).to have_content('Email has an invalid format')
   end
+
+  feature 'User sign in,' do
+    scenario 'I can sign in' do
+      sign_in
+      expect(page).to have_content "Welcome, testemail@example.com"
+    end
+  end
+
+  feature 'User sign out' do
+    scenario 'while being signed in' do
+      sign_in
+      click_button 'Sign out'
+      expect(page).to have_content('goodbye!')
+      expect(page).not_to have_content('Welcome, testemail@example.com')
+    end
+  end
   end
 
 end
