@@ -1,0 +1,13 @@
+<html>
+  <head>
+  </head>
+  <body>
+    <h1>Chitter</h1>
+    <ul id="peeps">
+      <% @peeps.each do |peep| %>
+        <li>Peep: <%= peep.peep %> </li>
+
+      <% end %>
+    </ul>
+  </body>
+</html>
