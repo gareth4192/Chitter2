@@ -1,7 +1,7 @@
 
-feature 'Chitter' do
-  feature '.Viewing peeps' do
-    scenario ',user is able to see list of peeps on homepage' do
+feature 'Chitter.' do
+  feature 'Viewing peeps,' do
+    scenario 'user is able to see list of peeps on homepage' do
       Peep.create(peep: 'test')
       visit '/'
       expect(page.status_code).to eq 200
@@ -11,8 +11,8 @@ feature 'Chitter' do
     end
   end
 
-  feature '.Creating peeps' do
-    scenario ',add a peep' do
+  feature 'Creating peeps,' do
+    scenario 'add a peep' do
       visit '/peeps/new'
       fill_in(:peep, with: 'testing123')
       click_button('Submit')
@@ -22,12 +22,38 @@ feature 'Chitter' do
     end
   end
 
-  feature '.Sign up' do
-    scenario ',user can register' do
+  feature 'Sign up,' do
+    scenario 'user can register' do
       expect { sign_up }.to change(User, :count).by(1)
       expect(page).to have_content('Welcome, test@live.com')
       expect(User.first.email).to eq('test@live.com')
     end
+  end
+
+  feature 'User sign up,' do
+    scenario 'requires a matching confirmation password' do
+      expect { sign_up_wrong }.not_to change(User, :count)
+    end
+
+    scenario 'displays error when passwords dont match' do
+      sign_up_wrong
+      expect(page).to have_content('Password does not match the confirmation')
+    end
+
+    scenario "I can't sign up without an email address" do
+      expect { no_email }.not_to change(User, :count)
+    end
+
+    scenario 'I cannot sign up with an existing email' do
+      sign_up
+      expect { sign_up }.to_not change(User, :count)
+      expect(page).to have_content('Email is already taken')
+    end
+
+    scenario 'I cannot sign up with an invalid email address' do
+      expect { sign_up_wrong }.not_to change(User, :count)
+      expect(page).to have_content('Email has an invalid format')
+  end
   end
 
 end

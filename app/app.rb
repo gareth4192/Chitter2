@@ -1,7 +1,14 @@
-# ENV['RACK_ENV'] = 'development'
+ENV['RACK_ENV'] ||= 'development'
 require 'sinatra/base'
 require_relative 'data_mapper_setup'
+require 'sinatra/flash'
+
 class Chitter < Sinatra::Base
+
+  register Sinatra::Flash
+  enable :sessions
+  set :session_secret, 'super secret'
+
   get '/' do
     @peeps = Peep.all
     erb :'/index'
@@ -14,6 +21,29 @@ class Chitter < Sinatra::Base
   post '/peeps' do
     Peep.create(peep: params[:peep])
     redirect '/'
+  end
+
+  get '/users/new' do
+    erb :'/users/new'
+  end
+
+  post '/users' do
+    user = User.create(email: params[:email], password: params[:password], password_confirmation: params[:password_confirmation])
+    if user.save
+      session[:user_id] = user.id
+      redirect '/peeps/new'
+    else
+      flash.next[:errors] = user.errors.full_messages
+      redirect '/users/new'
+    end
+
+  end
+
+
+  helpers do
+    def current_user
+      @current_user ||= User.get(session[:user_id])
+    end
   end
 
   # start the server if ruby file executed directly
