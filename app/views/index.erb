@@ -1,10 +1,43 @@
 
+<html>
+  <head>
+  </head>
+  <body>
+
+    <ul id="peeps">
+      <% @peeps.each do |peep| %>
+      <li>
+      <%= peep.name %>:<br>
+      <%= peep.peep %><br>
+      Posted at: <%= peep.time %><br><br>
+      <% end %>
+    </li>
+    </ul>
+
+    <% if current_user %>
+    <form method="post" action="/peeps">
+      <label for="text">
+        Peep:
+        <input type="text" name="peep">
+      </label>
+
+      <input type="submit" value="Submit">
+    </form>
+
+    <% else %>
+    <h1>Please sign in</h1>
+
+    <form action='/sessions' method='post'>
+      <label for='email'>
+        Email: <input name='email' type='email'>
+      </label>
+      <label for='password'>
+        Password: <input name='password' type='password'>
+      </label>
+      <input type='submit' value='Sign in'>
+    </form>
+    <% end %>
 
 
-<ul id="peeps">
-  <% @peeps.each do |peep| %>
-  <li>Peep: <%= peep.peep %> </li>
-
-  <% end %>
-
-</ul>
+  </body>
+</html>

@@ -2,7 +2,7 @@ require './app/models/user'
 describe User do
 
   let!(:user) do
-    User.create(email: 'gareth-123@hotmail.com', password: '123',
+    User.create(email: 'gareth-123@hotmail.com', username: 't', password: '123',
                password_confirmation: '123')
   end
 

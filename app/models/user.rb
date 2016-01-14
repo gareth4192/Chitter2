@@ -6,6 +6,7 @@ attr_accessor :password_confirmation
   include DataMapper::Resource
   property :id, Serial
   property :email, String, required: true, unique: true
+  property :username, String, required: true
   property :password_digest, Text
 
   validates_confirmation_of(:password)

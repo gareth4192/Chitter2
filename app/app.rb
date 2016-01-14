@@ -20,7 +20,8 @@ class Chitter < Sinatra::Base
   end
 
   post '/peeps' do
-    Peep.create(peep: params[:peep])
+    time = Time.new.strftime("%H:%M - %D")
+    Peep.create(peep: params[:peep], name: User.get(session[:user_id]).username, time: "#{time}")
     redirect '/'
   end
 
@@ -29,10 +30,10 @@ class Chitter < Sinatra::Base
   end
 
   post '/users' do
-    user = User.create(email: params[:email], password: params[:password], password_confirmation: params[:password_confirmation])
+    user = User.create(email: params[:email],username: params[:username], password: params[:password], password_confirmation: params[:password_confirmation])
     if user.save
       session[:user_id] = user.id
-      redirect '/peeps/new'
+      redirect '/'
     else
       flash.next[:errors] = user.errors.full_messages
       redirect '/users/new'
@@ -47,10 +48,10 @@ class Chitter < Sinatra::Base
     user = User.authenticate(params[:email], params[:password])
     if user
       session[:user_id] = user.id
-      redirect '/peeps/new'
+      redirect '/'
     else
       flash.next[:errors] = ['The email or password is incorrect']
-      redirect :'sessions/new'
+      redirect :'/'
     end
   end
 

@@ -13,6 +13,7 @@ feature 'Chitter.' do
 
   feature 'Creating peeps,' do
     scenario 'add a peep' do
+      sign_in
       visit '/peeps/new'
       fill_in(:peep, with: 'testing123')
       click_button('Submit')
