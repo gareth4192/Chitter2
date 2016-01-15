@@ -1,0 +1,51 @@
+.banner {
+margin: auto;
+margin-top: -10px;
+margin-left: -10px;
+margin-right: -10px;
+width: 100%;
+padding: 20px;
+background-color: rgba(255,255,255,0.7);
+text-align: left;
+}
+
+.banner h1 {
+    display: inline;
+    font-size: 250%;
+}
+.sign_out {
+  float: right;
+  margin-right: 90px;
+  margin-top: 20px;
+  display: inline-block;
+}
+
+.sign_up {
+  float: right;
+  margin-right: 90px;
+  margin-top: 20px;
+  display: inline-block;
+}
+
+.sign_up #sign_up {
+  width: 20em;
+}
+
+.sign_out #sign_out {
+  width: 20em;
+}
+
+#error_string {
+  color: white;
+  font-size: 150%;
+}
+
+#errors li {
+  color: white;
+  font-size: 100%;
+  list-style-type: none;
+}
+
+.title {
+  text-align: center;
+}

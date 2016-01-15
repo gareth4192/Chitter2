@@ -1,0 +1,38 @@
+body{
+  background: url('/images/bg.jpeg') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.container {
+    position: relative;
+    width: 100%;
+}
+
+.contents {
+ margin: auto;
+ margin-top: 40px;
+ width: 30%;
+ padding: 10px;
+ background-color: rgba(255,255,255,0.3);
+
+}
+
+.sign_up_form {
+  margin: auto;
+  margin-top: 90px;
+  width: 80%;
+  padding: 10px;
+  background-color: rgba(255,255,255,0.3);
+}
+
+#peeps li {
+    list-style-type: none;
+    border-width: 2px;
+    border-bottom: 2px rgba(0, 0, 0, .2) solid;
+    padding-top: 5px;
+}

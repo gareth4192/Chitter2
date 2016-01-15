@@ -2,20 +2,37 @@
 <html>
 <head>
   <title>Chitter</title>
+
+  <link rel="stylesheet" type="text/css" href="/layout.css">
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
 </head>
 
 <body>
+  <div class="banner">
+  <h1>Chitter&nbsp; &nbsp; &nbsp;</h1>
   <% if current_user %>
-  Welcome, <%= current_user.email %>
+  Welcome, <%= current_user.username %>
+  <div class="sign_out">
   <form method='post' action='/sessions'>
     <input type='hidden' name='_method' value='delete'>
-    <input type='submit' value='Sign out'>
+    <input type='submit' id="sign_out" value='Sign out'>
   </form>
+</div>
   <% end %>
+<% if !current_user %>
+  Welcome, create an account to starting posting!
+  <div class="sign_up">
+  <form action='/users/new'>
+    <input type='submit' id="sign_up" value='Sign up!'>
+  </form>
+</div>
+  <% end %>
+</div>
 
   <% if flash[:errors] && !flash[:errors].empty? %>
 </br>
 </br>
+<div id='error_string'>
   Please refer to the following errors below:
   <ul id='errors'>
     <% flash[:errors].each do |error| %>
@@ -23,6 +40,7 @@
     <% end %>
   </ul>
   <% end %>
+</div>
 
  <% if flash[:notice] %>
     <div id='notice'>

@@ -1,43 +1,53 @@
 
 <html>
-  <head>
-  </head>
-  <body>
+<head>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
 
-    <ul id="peeps">
-      <% @peeps.each do |peep| %>
-      <li>
-      <%= peep.name %>:<br>
-      <%= peep.peep %><br>
-      Posted at: <%= peep.time %><br><br>
+</head>
+<body>
+  <div class="container">
+    <div class="contents">
+      <div class="posts">
+        <ul id="peeps">
+          <% @peeps.each do |peep| %>
+          <li>
+            <%= peep.name %>:<br>
+            <%= peep.peep %><br>
+            Posted at: <%= peep.time %><br><br>
+            <% end %>
+          </li>
+        </ul>
+      </div>
+      <% if current_user %>
+      <form method="post" action="/peeps">
+        <label for="text">
+          Peep:
+          <input type="text" name="peep">
+        </label>
+
+        <input type="submit" value="Submit">
+      </form>
+
+      <% else %>
+      <h1>Please sign in</h1>
+
+      <form action='/sessions' method='post'>
+        <label for='email'>
+          Email &nbsp; &nbsp; &nbsp;<input name='email' type='email'>
+          <br>  <br>
+
+        </label>
+        <label for='password'>
+          Password <input name='password' type='password'>
+        </label>
+        <br>
+        <input type='submit' value='Sign in'>
+      </form>
       <% end %>
-    </li>
-    </ul>
-
-    <% if current_user %>
-    <form method="post" action="/peeps">
-      <label for="text">
-        Peep:
-        <input type="text" name="peep">
-      </label>
-
-      <input type="submit" value="Submit">
-    </form>
-
-    <% else %>
-    <h1>Please sign in</h1>
-
-    <form action='/sessions' method='post'>
-      <label for='email'>
-        Email: <input name='email' type='email'>
-      </label>
-      <label for='password'>
-        Password: <input name='password' type='password'>
-      </label>
-      <input type='submit' value='Sign in'>
-    </form>
-    <% end %>
+    </div>
+  </div>
 
 
-  </body>
+</body>
 </html>
